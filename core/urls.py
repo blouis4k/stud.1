@@ -5,16 +5,28 @@ import traceback
 
 def setup_admin(request):
     try:
+        steps = []
+
+        steps.append("Starting setup...")
+
         call_command('migrate')
+        steps.append("Migrations complete.")
 
         User = get_user_model()
+        steps.append("User model retrieved.")
+
         if not User.objects.filter(username='admin').exists():
             User.objects.create_superuser(
                 username='admin',
                 email='info@createstudiosleicester.co.uk',
                 password='CreateSecureAdmin2025!'
             )
-            return HttpResponse("Superuser created! You can now log in at /admin/")
-        return HttpResponse("Admin already exists. You can log in at /admin/")
+            steps.append("Superuser created.")
+        else:
+            steps.append("Superuser already exists.")
+
+        steps.append("Setup complete. You can now log in at /admin/")
+        return HttpResponse("<br>".join(steps))
+
     except Exception:
         return HttpResponse('<pre>' + traceback.format_exc() + '</pre>', status=500)
