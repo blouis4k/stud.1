@@ -1,6 +1,14 @@
-# Django settings for Create Studios backend
+# Fully working Django settings for Create Studios backend
 
-ROOT_URLCONF = 'core.urls'
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = 'your-secret-key'  # optional: replace with a secure key
+DEBUG = True
+
+ALLOWED_HOSTS = ['*']  # For now; restrict later in production
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -11,13 +19,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -27,6 +28,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -43,6 +46,17 @@ TEMPLATES = [
         },
     },
 ]
-import os
 
-ALLOWED_HOSTS = ['*']
+WSGI_APPLICATION = 'core.wsgi.application'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
