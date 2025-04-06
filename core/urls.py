@@ -1,6 +1,8 @@
+from django.contrib import admin
+from django.urls import path
 from django.contrib.auth import get_user_model
-from django.core.management import call_command
 from django.http import HttpResponse
+from django.core.management import call_command
 import traceback
 
 def setup_admin(request):
@@ -28,5 +30,11 @@ def setup_admin(request):
         steps.append("Setup complete. You can now log in at /admin/")
         return HttpResponse("<br>".join(steps))
 
-    except Exception:
-        return HttpResponse('<pre>' + traceback.format_exc() + '</pre>', status=500)
+    except Exception as e:
+        error_message = traceback.format_exc()
+        return HttpResponse(f"Error during setup:<br><pre>{error_message}</pre>", status=500)
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('setup/', setup_admin),
+]
