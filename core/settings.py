@@ -43,3 +43,6 @@ TEMPLATES = [
         },
     },
 ]
+import os
+
+ALLOWED_HOSTS = ['*']
