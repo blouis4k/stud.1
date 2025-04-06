@@ -13,7 +13,7 @@ def setup_admin(request):
                 email='info@createstudiosleicester.co.uk',
                 password='CreateSecureAdmin2025!'
             )
-            return HttpResponse('✅ Superuser created! Go to /admin/ to log in.')
-        return HttpResponse('⚠️ Admin already exists.')
-    except Exception as e:
-        return HttpResponse(f'<pre>{traceback.format_exc()}</pre>')
+            return HttpResponse('Superuser created. You can now log in at /admin/')
+        return HttpResponse('Admin already exists.')
+    except Exception:
+        return HttpResponse('<pre>' + traceback.format_exc() + '</pre>', status=500)
