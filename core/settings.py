@@ -26,13 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third-party apps
+    # third-party apps
     'rest_framework',
     'corsheaders',
-    'channels',
 
-    # Local apps
-    'booking',
+    # your app(s)
+    'booking',  # or whatever your app is called
 ]
 
 MIDDLEWARE = [
