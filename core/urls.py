@@ -22,3 +22,4 @@ urlpatterns = [
     path('', home),
     path('setup/', setup_view),
 ]
+
