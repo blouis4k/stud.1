@@ -19,6 +19,6 @@ def setup_admin(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('setup/', setup_admin),
+    path('', home),            # route: /
+    path('setup/', setup_admin),  # route: /setup/
 ]
