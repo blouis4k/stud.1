@@ -4,10 +4,8 @@ from django.http import HttpResponse
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
 
-
 def home(request):
-    return HttpResponse("✅ Create Studios backend is live and working!")
-
+    return HttpResponse("🎉 Create Studios backend is live and working!")
 
 def setup_admin(request):
     try:
@@ -19,10 +17,8 @@ def setup_admin(request):
     except Exception as e:
         return HttpResponse(f"❌ Error during setup:<br><pre>{e}</pre>")
 
-
 urlpatterns = [
-    path('', home),
     path('admin/', admin.site.urls),
+    path('', home),
     path('setup/', setup_admin),
 ]
-,
