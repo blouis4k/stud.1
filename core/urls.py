@@ -15,7 +15,7 @@ def setup_admin(request):
             User.objects.create_superuser("admin", "admin@example.com", "adminpassword123")
         return HttpResponse("✅ Setup complete. You can now log in at /admin/")
     except Exception as e:
-        return HttpResponse(f"❌ Error during setup:<br><pre>{e}</pre>")
+        return HttpResponse(f"Error during setup:<br><pre>{e}</pre>")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
