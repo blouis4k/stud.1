@@ -18,7 +18,7 @@ def setup_admin(request):
         return HttpResponse(f"❌ Error during setup:<br><pre>{e}</pre>")
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', home),
     path('setup/', setup_admin),
-    path('admin/', admin.site.urls),
 ]
