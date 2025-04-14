@@ -66,9 +66,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 ASGI_APPLICATION = 'core.asgi.application'
 
 # ✅ Database using DATABASE_URL from Render
+import dj_database_url
+
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.config(conn_max_age=600)
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
