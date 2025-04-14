@@ -3,6 +3,7 @@ from django.urls import path
 from django.http import HttpResponse
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
+import traceback
 
 def home(request):
     return HttpResponse("🎉 Create Studios backend is live and working!")
@@ -15,7 +16,7 @@ def setup_admin(request):
             User.objects.create_superuser("admin", "admin@example.com", "adminpassword123")
         return HttpResponse("✅ Setup complete. You can now log in at /admin/")
     except Exception as e:
-        return HttpResponse(f"❌ Error during setup:<br><pre>{e}</pre>")
+        return HttpResponse(f"❌ Error during setup:<br><pre>{traceback.format_exc()}</pre>")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
