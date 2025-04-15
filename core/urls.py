@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.http import HttpResponse
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
@@ -9,23 +9,17 @@ def home(request):
 
 def setup_admin(request):
     try:
-        # Run makemigrations for the booking app
-        call_command("makemigrations", "booking")
-
-        # Apply all migrations
         call_command("migrate")
-
-        # Create an admin user if one doesn't exist
         User = get_user_model()
         if not User.objects.filter(username="admin").exists():
             User.objects.create_superuser("admin", "admin@example.com", "adminpassword123")
-
         return HttpResponse("✅ Setup complete. Admin user created. You can now log in at /admin/")
     except Exception as e:
         return HttpResponse(f"❌ Error during setup:<br><pre>{e}</pre>")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', home),
     path('setup/', setup_admin),
+    path('admin/', admin.site.urls),
+    path('api/', include('booking.urls')),  # Adds API route: /api/bookings/
 ]
