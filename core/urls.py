@@ -18,8 +18,8 @@ def setup_admin(request):
         return HttpResponse(f"❌ Error during setup:<br><pre>{e}</pre>")
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', home),
     path('setup/', setup_admin),
-    path('admin/', admin.site.urls),
-    path('api/', include('booking.urls')),  # Adds API route: /api/bookings/
+    path('api/', include('booking.urls')),  # ✅ This line makes the API route work
 ]
